@@ -100,7 +100,29 @@ function submitReturn(){ // 退货脚本
             // 事件，以便得知“服务器返回了”
             alert("send之后");
 }
-	
+function SearchClientName(){//根据用户姓名查找用户信息
+		var ClientName = document.getElementById("SearchClient-name");
+		if(ClientName.value != "")
+		{
+			var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP'); //创建XMLHTTP对象，考虑兼容性
+        	xhr.open("POST","OrderServlet?method=queryByName&clientName="+ClientName.value,true);
+        	xhr.onreadystatechange=function(){
+        	if(xhr.readyState==4)//服务器返回了
+        		{
+             		if(xhr.status==200)
+             		{
+             			alert(xhr.responseText);
+             		}
+             	}
+             }
+             xhr.send();
+		}
+		else
+		{
+			alert("请填写客户姓名");
+		}
+	}
+
 function submitSearch(){ // 查找订单脚本
 	var orderId=document.getElementById("searchOrderId");
 	var orderClicent=document.getElementById("searchOrderClient");
